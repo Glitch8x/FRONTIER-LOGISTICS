@@ -1,7 +1,8 @@
-import { SuiClient, getFullnodeUrl } from '@mysten/sui/client';
+import { SuiClient } from '@mysten/sui/client';
+import { getJsonRpcFullnodeUrl } from '@mysten/sui/jsonRpc';
 
-// Configure the Sui Testnet client
-const client = new SuiClient({ url: getFullnodeUrl('testnet') });
+// Configure the Sui Testnet client correctly for v2.x
+const client = new SuiClient({ url: getJsonRpcFullnodeUrl('testnet') });
 
 // The ID of the shared Leaderboard object after deployment
 export const LEADERBOARD_OBJECT_ID = "0xYourLeaderboardObjectID"; 
