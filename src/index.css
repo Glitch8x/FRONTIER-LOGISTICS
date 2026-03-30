@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-eve-cyan: #ff1a1a;
+  --color-eve-blue: #cc0000;
+  --color-eve-green: #39ff14;
+  --color-eve-dark: #0a0a0a;
+}
+
+body {
+  @apply bg-[#050505] text-white selection:bg-red-500/30;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.glass-morphism {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+}
+
+.neon-glow {
+  box-shadow: 0 0 15px rgba(255, 26, 26, 0.3);
+}
+
+.neon-text-cyan {
+  text-shadow: 0 0 10px rgba(255, 26, 26, 0.5);
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scanline::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, transparent, rgba(255, 26, 26, 0.05), transparent);
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+}

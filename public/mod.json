@@ -1,0 +1,17 @@
+{
+  "name": "Frontier Industrial Oversight",
+  "description": "Premium industrial throughput leaderboard and sector tactical map for EVE Frontier industrialists.",
+  "version": "1.0.4",
+  "author": "Antigravity",
+  "type": "UI_MOD",
+  "entry": "index.html",
+  "permissions": [
+    "network:sui-testnet",
+    "storage:local",
+    "ui:window-management"
+  ],
+  "settings": {
+    "default_mode": "cockpit",
+    "theme": "sharp_red"
+  }
+}
