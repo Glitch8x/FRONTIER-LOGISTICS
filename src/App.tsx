@@ -284,8 +284,7 @@ export default function App() {
                   const isUser = account && player.address.toLowerCase() === account.address.toLowerCase();
                   return (
                     <div key={player.address} className={`grid grid-cols-[120px_2fr_1.5fr_220px] items-center px-8 py-8 group transition-all duration-300 relative ${isUser ? 'bg-red-600/10' : 'hover:bg-red-600/5'}`}>
-                      {/* POS */}
-                      <div className="flex justify-center">
+                      <div className="flex justify-center h-full items-center">
                         <span className={`text-5xl font-black italic tracking-tighter transition-all opacity-10 group-hover:opacity-40 leading-none ${isUser ? 'text-red-500 opacity-100' : 'text-white'}`}>
                           {i + 1 < 10 ? `0${i + 1}` : i + 1}
                         </span>
