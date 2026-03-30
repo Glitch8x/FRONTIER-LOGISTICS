@@ -269,69 +269,71 @@ export default function App() {
             </div>
 
             <div className={`glass-morphism rounded-[2.5rem] overflow-hidden border shadow-2xl bg-black/40 transition-all ${cockpitMode ? 'border-red-500/40 scale-[0.99] shadow-red-500/10' : 'border-white/5'}`}>
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-white/5 text-[9px] uppercase tracking-[0.3em] font-black text-gray-500 border-b border-white/10">
-                    <th className="px-10 py-8">POS</th>
-                    <th className="px-10 py-8">Industrial Entity</th>
-                    <th className="px-10 py-8">Output (u)</th>
-                    <th className="px-10 py-8">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/5">
-                  {leaderboard.map((player, i) => {
-                    const rankInfo = getRank(player.volume);
-                    const isUser = account && player.address.toLowerCase() === account.address.toLowerCase();
-                    return (
-                      <tr key={player.address} className={`group transition-all duration-300 relative ${isUser ? 'bg-red-600/10' : 'hover:bg-red-600/5'}`}>
-                        <td className="px-10 py-10 w-24">
-                          <span className={`text-4xl font-black italic tracking-tighter transition-all ${isUser ? 'text-red-500' : 'text-white/10 group-hover:text-white/30'}`}>
-                            {i + 1 < 10 ? `0${i + 1}` : i + 1}
-                          </span>
-                        </td>
-                        <td className="px-10 py-10">
-                          <div className="flex items-center gap-6">
-                            <div className={`w-16 h-16 rounded-[1.25rem] border flex items-center justify-center bg-black transition-all ${isUser ? 'border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.2)]' : 'border-white/10 group-hover:border-white/20'}`}>
-                               <img 
-                                 src={isUser && userProfile.avatar ? userProfile.avatar : `https://api.dicebear.com/7.x/bottts/svg?seed=${player.address}`} 
-                                 alt="Entity" className="w-10 h-10 opacity-70 group-hover:opacity-100 transition-all" 
-                               />
-                            </div>
-                            <div className="flex flex-col gap-1.5">
-                              <span className={`text-xl font-bold transition-all ${isUser ? 'text-red-500 italic' : 'text-white/80 group-hover:text-white'}`}>{player.name}</span>
-                              <div className="flex items-center gap-3">
-                                 <span className="font-mono text-[10px] text-gray-600 font-black tracking-widest">{player.address.slice(0, 10)}...</span>
-                                 {player.fleet && (
-                                   <span className="flex items-center gap-1 text-[8px] font-black px-2 py-0.5 border border-red-500/30 text-red-500 rounded uppercase">
-                                     <Shield className="w-2 h-2" /> {player.fleet}
-                                   </span>
-                                 )}
-                              </div>
-                            </div>
+              {/* Grid Header */}
+              <div className="grid grid-cols-[120px_2fr_1.5fr_220px] bg-white/5 text-[9px] uppercase tracking-[0.3em] font-black text-gray-500 border-b border-white/10 px-8 py-6">
+                <div className="text-center">POS</div>
+                <div>Industrial Entity</div>
+                <div>Output (u)</div>
+                <div className="text-right pr-6">Status</div>
+              </div>
+
+              {/* Grid Rows */}
+              <div className="divide-y divide-white/5">
+                {leaderboard.map((player, i) => {
+                  const rankInfo = getRank(player.volume);
+                  const isUser = account && player.address.toLowerCase() === account.address.toLowerCase();
+                  return (
+                    <div key={player.address} className={`grid grid-cols-[120px_2fr_1.5fr_220px] items-center px-8 py-8 group transition-all duration-300 relative ${isUser ? 'bg-red-600/10' : 'hover:bg-red-600/5'}`}>
+                      {/* POS */}
+                      <div className="flex justify-center">
+                        <span className={`text-5xl font-black italic tracking-tighter transition-all opacity-10 group-hover:opacity-40 leading-none ${isUser ? 'text-red-500 opacity-100' : 'text-white'}`}>
+                          {i + 1 < 10 ? `0${i + 1}` : i + 1}
+                        </span>
+                      </div>
+
+                      {/* Identity */}
+                      <div className="flex items-center gap-6 overflow-hidden">
+                        <div className={`w-14 h-14 shrink-0 rounded-xl border flex items-center justify-center bg-black transition-all ${isUser ? 'border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.2)]' : 'border-white/10 group-hover:border-white/20'}`}>
+                           <img 
+                             src={isUser && userProfile.avatar ? userProfile.avatar : `https://api.dicebear.com/7.x/bottts/svg?seed=${player.address}`} 
+                             alt="Entity" className="w-10 h-10 opacity-70 group-hover:opacity-100 transition-all" 
+                           />
+                        </div>
+                        <div className="flex flex-col gap-1.5 min-w-0">
+                          <span className={`text-xl font-bold leading-tight truncate transition-all ${isUser ? 'text-red-500 italic' : 'text-white/80 group-hover:text-white'}`}>{player.name}</span>
+                          <div className="flex items-center gap-2 leading-none">
+                             <span className="font-mono text-[9px] text-gray-600 font-black tracking-widest">{player.address.slice(0, 10)}...</span>
+                             {player.fleet && (
+                               <span className="flex items-center gap-1 text-[8px] font-black px-2 py-0.5 border border-red-500/30 text-red-500 rounded uppercase">
+                                 <Shield className="w-2.5 h-2.5" /> {player.fleet}
+                               </span>
+                             )}
                           </div>
-                        </td>
-                        <td className="px-10 py-10">
-                           <div className="flex flex-col gap-2">
-                             <div className="flex items-baseline gap-2">
-                               <span className={`text-3xl font-black font-mono tracking-tighter ${isUser ? 'text-red-500' : 'text-white'}`}>{player.volume.toLocaleString()}</span>
-                               <span className="text-[10px] text-gray-600 font-black uppercase">Units</span>
-                             </div>
-                             <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden max-w-[150px] relative">
-                                <div className={`h-full absolute left-0 top-0 transition-all duration-1000 ${isUser ? 'bg-red-500' : 'bg-red-900 group-hover:bg-red-700'}`} style={{ width: `${(player.volume / leaderboard[0].volume) * 100}%` }} />
-                             </div>
-                           </div>
-                        </td>
-                        <td className="px-10 py-10">
-                           <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-full border bg-black/40 ${isUser ? 'text-red-500 border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.1)]' : rankInfo.color + ' border-current/20'} text-[9px] uppercase font-black tracking-[0.2em] italic`}>
-                             <span>{rankInfo.icon}</span>
-                             <span>{rankInfo.label}</span>
-                           </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                        </div>
+                      </div>
+
+                      {/* Output */}
+                      <div className="flex flex-col gap-3 pr-8">
+                         <div className="flex items-baseline gap-2 leading-none">
+                           <span className={`text-4xl font-black font-mono tracking-tighter ${isUser ? 'text-red-500 font-black' : 'text-white'}`}>{player.volume.toLocaleString()}</span>
+                           <span className="text-[10px] text-gray-600 font-black uppercase tracking-widest leading-none">Units</span>
+                         </div>
+                         <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden relative">
+                            <div className={`h-full absolute left-0 top-0 transition-all duration-1000 ${isUser ? 'bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.6)]' : 'bg-red-900 group-hover:bg-red-700'}`} style={{ width: `${(player.volume / leaderboard[0].volume) * 100}%` }} />
+                         </div>
+                      </div>
+
+                      {/* Status */}
+                      <div className="flex justify-end pr-6">
+                         <div className={`inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl border bg-black/40 ${isUser ? 'text-red-500 border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.1)]' : rankInfo.color + ' border-current/20'} text-[10px] uppercase font-black tracking-[0.2em] italic transition-all group-hover:scale-105 group-hover:bg-red-600/5`}>
+                           <span className="animate-pulse">{rankInfo.icon}</span>
+                           <span>{rankInfo.label}</span>
+                         </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

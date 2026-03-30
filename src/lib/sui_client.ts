@@ -1,4 +1,4 @@
-import { SuiClient, getFullnodeUrl } from '@mysten/sui.js/client';
+import { SuiClient, getFullnodeUrl } from '@mysten/sui/client';
 
 // Configure the Sui Testnet client
 const client = new SuiClient({ url: getFullnodeUrl('testnet') });
