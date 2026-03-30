@@ -1,6 +1,5 @@
 {
   "buildCommand": "npm run build",
-  "installCommand": "npm install --force",
-  "framework": "vite",
-  "regions": ["iad1"]
+  "installCommand": "npm install --force --legacy-peer-deps",
+  "framework": "vite"
 }
