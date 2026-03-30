@@ -1,7 +1,7 @@
 {
-  "name": "onchain-leaderboard",
+  "name": "frontier-logistics-core",
   "private": true,
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "engines": {
     "node": ">=20.0.0"
